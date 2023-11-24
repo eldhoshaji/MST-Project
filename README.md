@@ -60,22 +60,18 @@ The `core/` directory contains core functionalities of the application.
 
 - `backend/`: Contains the backend API services and corresponding service classes.
 - `guards/`: Contains route guards to protect certain routes.
-- `interceptor/`: Houses HTTP interceptors for handling HTTP requests and responses.
 
 ### `layout/`
 
 The `layout/` directory contains layout components for different screens of the application.
 
-- `auth`: Layout components related to authentication screens.
-- `main`: Layout components for the main content screens.
+- `content`: Layout components for the main content screens.
 
 ## `modules/`
 
 The `modules/` directory houses feature modules for different sections of the application.
 
-- `home/`: Contains components and services related to the student dashboard.
-- `auth/`: Contains components for login and registration screens.
-- `admin-panel/`: Contains components for the admin panel screen.
+- `home/`: Contains table component that list the live player data.
 
 ## `shared/`
 
