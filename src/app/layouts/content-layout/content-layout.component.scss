@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  height: 100%;
+
+  .main {
+    width: 100%;
+    flex-grow: 1;
+
+    .header {
+      height: 60px;
+      background-color: var(--card-background);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0px 30px;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text-primary);
+    }
+
+    .content {
+      height: calc(100% - 60px);
+      overflow: scroll;
+      background-color: var(--background);
+    }
+  }
+
+}

@@ -1,0 +1,141 @@
+<div class="container">
+  <p-table
+      #dt1
+      [value]="players"
+      dataKey="MSTID"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [loading]="false"
+      [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    >
+
+      <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 5rem"></th>
+              <th style="min-width:15rem">
+                <div class="flex align-items-center">
+                    Player
+                    <p-columnFilter type="text" field="Name" display="menu"></p-columnFilter>
+                </div>
+              </th>
+              <th pSortableColumn="Match" style="min-width:10rem">
+                <div class="flex align-items-center">
+                    Match <p-sortIcon field="Match"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="position" style="min-width:10rem">
+                <div class="flex align-items-center">
+                    Position <p-sortIcon field="position"></p-sortIcon>
+                </div>
+              </th>
+
+              <th pSortableColumn="Score" style="min-width:10rem">
+                <div class="flex align-items-center">
+                    Score <p-sortIcon field="Score"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="Today" style="min-width:10rem">
+                <div class="flex align-items-center">
+                    Today's Score <p-sortIcon field="Today"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="CalculatedRankInteger" style="min-width:15rem">
+                <div class="flex align-items-center">
+                    Calculated Rank <p-sortIcon field="name"></p-sortIcon>
+                </div>
+              </th>
+              <th style="min-width:10rem">
+                <div class="flex align-items-center">
+                    Player Type
+                </div>
+              </th>
+              <th style="min-width:10rem">Status</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-player let-expanded="expanded">
+          <tr>
+              <td>
+                <button type="button" pButton pRipple [pRowToggler]="player" class="p-button-text p-button-rounded p-button-plain"
+                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+              </td>
+              <td>
+                <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                    [class]="'fi fi-' + (player.Nationality | country)" style="width: 20px" />
+                &nbsp; {{ player.Name}}
+              </td>
+              <td>
+                {{ player.Match }}
+              </td>
+              <td>
+                {{ player.position }}
+              </td>
+              <td>
+                {{ player.Score }}
+              </td>
+              <td>
+                {{ player.Today }}
+              </td>
+              <td>
+                {{ player.CalculatedRankInteger }}
+              </td>
+              <td>
+                <p-tag [value]="player.Amature ? 'Amature': 'Professional'"
+                  [severity]="player.Amature ? 'success': 'primary'">
+                </p-tag>
+              </td>
+              <td>
+                <i class="pi"
+                [ngClass]="{ 'text-green pi-check-circle': player.status, 'text-red pi-times-circle': !player.status }"></i>
+              </td>
+
+          </tr>
+      </ng-template>
+
+      <ng-template pTemplate="rowexpansion" let-player>
+        <tr>
+          <td colspan="9">
+            <div class="table-container">
+              <table class="score-table">
+                <thead>
+                  <tr>
+                    <th>HOLE</th>
+                    <th *ngFor="let hole of frontNine">{{ hole }}</th>
+                    <th>OUT</th>
+                    <th *ngFor="let hole of backNine">{{ hole }}</th>
+                    <th>IN</th>
+                    <th>TOT</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>STP</td>
+                    <td *ngFor="let hole of frontNine">{{ getStp(player, hole) }}</td>
+                    <td>{{ player.OutSTP }}</td>
+                    <td *ngFor="let hole of backNine">{{ getStp(player, hole) }}</td>
+                    <td>{{ player.InSTP }}</td>
+                    <td>{{ player.TotalSTP }}</td>
+                  </tr>
+                  <tr>
+                    <td>Strokes</td>
+                    <td *ngFor="let hole of frontNine">{{ getStrokes(player, hole) }}</td>
+                    <td>{{ player.OutStrokes }}</td>
+                    <td *ngFor="let hole of frontNine">{{ getStrokes(player, hole) }}</td>
+                    <td>{{ player.InStrokes }}</td>
+                    <td>{{ player.TotalStrokes }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+    </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+          <tr>
+              <td colspan="9">No players found.</td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>
