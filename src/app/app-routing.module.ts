@@ -5,7 +5,7 @@ import { ContentLayoutComponent } from './layouts/content-layout/content-layout.
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/home/dashboard',
     pathMatch: 'full'
   },
   {
@@ -20,7 +20,7 @@ const routes: Routes = [
     ]
   },
   // Fallback when no prior routes is matched
-  { path: '**', redirectTo: '/home', pathMatch: 'full' }
+  { path: '**', redirectTo: '/home/dashboard', pathMatch: 'full' }
 ];
 
 @NgModule({
